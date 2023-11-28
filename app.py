@@ -4,7 +4,7 @@ import sqlite3
 import random
 import datetime
 # import asyncio
-from ui.uiProj import temp
+from uiProj import temp
 
 from PyQt5 import uic
 from PyQt5.QtWidgets import QApplication, QMainWindow, QMessageBox, QListWidgetItem, QFileDialog
@@ -126,7 +126,7 @@ class TestingSystem(QMainWindow):
             email = self.emailEdit.text()
             password = self.passwordEdit.text()
             if name != 'InputName':
-                con = sqlite3.connect(r'databases\app.db')
+                con = sqlite3.connect(r'app.db')
                 cur = con.cursor()
                 registration = cur.execute(
                     f'SELECT * FROM users WHERE id_name = "{name}"').fetchone()
@@ -176,7 +176,7 @@ class TestingSystem(QMainWindow):
 
     def runTest(self):
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
             self.sessionPage = 1
             self.testFinishBtn.setVisible(False)
@@ -211,7 +211,7 @@ class TestingSystem(QMainWindow):
 
     def question_next(self):
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
             text = cur.execute(
                 f'''SELECT "{self.sessionPage}" FROM tests_questions WHERE item_id = {self.lastIdTest}''').fetchone()[0].replace('\\n', "\n")
@@ -280,7 +280,7 @@ class TestingSystem(QMainWindow):
         select_class = self.selectClassBox.currentText()
         select_file = self.lastInsertFile
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
             name = self.nameEdit.text()
             id_tests = [i[0] for i in cur.execute(
@@ -334,7 +334,7 @@ class TestingSystem(QMainWindow):
 
     def updateStats(self):
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
 
             self.ratingList.clear()
@@ -364,7 +364,7 @@ class TestingSystem(QMainWindow):
 
     def updateProfile(self):
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
             name = self.nameEdit.text()
             info = cur.execute(
@@ -378,7 +378,7 @@ class TestingSystem(QMainWindow):
 
     def updateTaskDetails(self):
         try:
-            con = sqlite3.connect(r'databases\app.db')
+            con = sqlite3.connect(r'app.db')
             cur = con.cursor()
             name = self.nameEdit.text()
             decidedToday = cur.execute(
